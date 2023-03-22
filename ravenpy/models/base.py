@@ -83,13 +83,13 @@ class Raven:
                 "Could not find raven binary in PATH, and RAVENPY_RAVEN_BINARY_PATH env variable is not set"
             )
 
-        if not OSTRICH_EXEC_PATH:
-            raise RuntimeError(
-                "Could not find ostrich binary in PATH, and RAVENPY_OSTRICH_BINARY_PATH env variable is not set"
-            )
+        # if not OSTRICH_EXEC_PATH:
+        #     raise RuntimeError(
+        #         "Could not find ostrich binary in PATH, and RAVENPY_OSTRICH_BINARY_PATH env variable is not set"
+        #     )
 
         self.raven_exec = RAVEN_EXEC_PATH
-        self.ostrich_exec = OSTRICH_EXEC_PATH
+        # self.ostrich_exec = OSTRICH_EXEC_PATH
 
         # Get version from Raven binary CLI output
         out = subprocess.check_output([self.raven_exec], input="\n", text=True)
@@ -703,8 +703,8 @@ class Ostrich(Raven):
         self.write_save_best()
 
         # Create symbolic link to executable
-        if not self.cmd.exists():
-            os.symlink(self.ostrich_exec, str(self.cmd))
+        # if not self.cmd.exists():
+        #     os.symlink(self.ostrich_exec, str(self.cmd))
 
     def configure(self, fns):
         """Set configuration from existing RV files. The `self.identifier` attribute will be updated
