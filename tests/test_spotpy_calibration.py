@@ -62,18 +62,18 @@ class TestSpotpy:
         )
 
         model = GR4JCN(
-            params=[0.529, -3.396, 407.29, 1.072, 16.9, 0.947],
-            ObservationData=rc.ObservationData.from_nc(ts, alt_names="qobs"),
+            params=[0.529, -3.396, 407.29, 1.072, 16.9, 0.947], # Pas d'erreur?
+            ObservationData=rc.ObservationData.from_nc(ts, alt_names="qobs"), # Juste necessaire pour la calibration
             Gauge=rc.Gauge.from_nc(
                 ts,
                 alt_names=alt_names,
                 extra={1: {"elevation": salmon_land_hru_1["elevation"]}},
             ),
             HRUs=[salmon_land_hru_1],
-            StartDate=dt.datetime(2000, 1, 1),
+            StartDate=dt.datetime(1960, 1, 1),
             EndDate=dt.datetime(2002, 1, 1),
-            RunName="test",
-            EvaluationMetrics=("NASH_SUTCLIFFE",),
+            RunName="test", # Le nom par defaut?
+            EvaluationMetrics=("NASH_SUTCLIFFE",), # Devrait pas etre obligatoire
         )
 
         spot_setup = SpotSetup(
@@ -117,7 +117,7 @@ class TestSpotpy:
             ObservationData=rc.ObservationData.from_nc(ts, alt_names="qobs"),
             Gauge=rc.Gauge.from_nc(
                 ts,
-                alt_names=alt_names,
+                alt_names=alt_names, # Avoir une erreur plus clair que no data
                 extra={1: {"elevation": salmon_land_hru_1["elevation"]}},
             ),
             HRUs=[salmon_land_hru_1],
